@@ -51,3 +51,4 @@ frontend/.vite/
 # Misc
 *.pem
 .cache/
+scripts/
