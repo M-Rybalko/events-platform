@@ -1,4 +1,4 @@
-# events-platform
+# Zbir.ua
 
 Веб-сервіс для організації суспільних заходів: концертів, фестивалів, волонтерських акцій, освітніх воркшопів та мітингів громад.
 
@@ -14,6 +14,7 @@
 **Frontend:**
 - React + Vite
 - Tailwind CSS
+- TanStack Query — серверний стан
 - react-leaflet (карта на тайлах OpenStreetMap)
 
 **Інфраструктура:**
@@ -25,8 +26,9 @@
 
 ```
 events-platform/
-├── backend/      Hono REST API
-├── frontend/     React SPA
+├── backend/        Hono REST API
+├── frontend/       React SPA
+├── scripts/        Допоміжні скрипти (smoke-test)
 └── docker-compose.yml
 ```
 
@@ -46,9 +48,10 @@ events-platform/
    cd events-platform
    ```
 
-2. Створити `.env` на основі `.env.example`:
+2. Створити `.env` на основі `.env.example` та згенерувати JWT_SECRET:
    ```bash
    cp .env.example .env
+   openssl rand -base64 32   # вставити у JWT_SECRET
    ```
 
 3. Підняти PostgreSQL та Redis:
@@ -60,6 +63,8 @@ events-platform/
    ```bash
    cd backend
    npm install
+   npm run db:generate
+   npm run db:migrate
    npm run dev
    ```
 
@@ -68,6 +73,11 @@ events-platform/
    cd frontend
    npm install
    npm run dev
+   ```
+
+6. Перевірити API smoke-test'ом:
+   ```bash
+   ./scripts/smoke-test.sh
    ```
 
 ## Ліцензія

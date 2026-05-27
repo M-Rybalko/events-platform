@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    @apply text-slate-900 font-sans;
+    background-color: #fafafb;
+    background-image:
+      radial-gradient(at 0% 0%, rgba(167, 139, 250, 0.06) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(217, 70, 239, 0.04) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  /* Покращений focus-ring глобально для контролів Leaflet тощо */
+  .leaflet-container {
+    font-family: inherit !important;
+  }
+}
+
+/* Власні маркери на карті */
+.zbir-marker {
+  background: transparent !important;
+  border: 0 !important;
+}
+.zbir-marker-inner {
+  width: 32px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  border: 2px solid white;
+  color: white;
+  font-size: 16px;
+}
+.zbir-marker-inner > * {
+  transform: rotate(45deg);
+}
+
+/* Кластери */
+.marker-cluster-small,
+.marker-cluster-medium,
+.marker-cluster-large {
+  background-color: rgba(139, 92, 246, 0.25);
+}
+.marker-cluster-small div,
+.marker-cluster-medium div,
+.marker-cluster-large div {
+  background-color: rgba(139, 92, 246, 0.9);
+  color: white;
+  font-weight: 600;
+}
+
+/* Маркер користувача (геолокація) — пульсуюча точка */
+.zbir-user-marker {
+  background: transparent !important;
+  border: 0 !important;
+  position: relative;
+}
+.zbir-user-dot {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #8b5cf6;
+  border: 2px solid white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+.zbir-user-pulse {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(139, 92, 246, 0.4);
+  animation: zbir-pulse 2s ease-out infinite;
+}
+@keyframes zbir-pulse {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  100% { transform: scale(3.5); opacity: 0;   }
+}

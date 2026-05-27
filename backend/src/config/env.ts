@@ -19,6 +19,9 @@ const envSchema = z.object({
   GOOGLE_REDIRECT_URI: z.string().url().optional(),
 
   FRONTEND_ORIGIN: z.string().url().default('http://localhost:5173'),
+  PUBLIC_URL: z.string().url().optional(),
+
+  UPLOAD_MAX_BYTES: z.coerce.number().int().positive().default(5 * 1024 * 1024),
 
   SMTP_HOST: z.string().optional(),
   SMTP_PORT: z.coerce.number().int().positive().optional(),
